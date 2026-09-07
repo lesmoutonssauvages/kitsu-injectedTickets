@@ -1,5 +1,5 @@
 # Vite / Node
-dist
+!dist
 dist-ssr
 node_modules
 *.local
