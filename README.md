@@ -1,7 +1,8 @@
 # Injected Tickets — Zou example plugin (injected)
 
 Reference Zou/Kitsu plugin: ticket management (issues on tasks) with models,
-API, and an **injected** Vue frontend.
+API, and an **injected** Vue frontend built with
+[`kitsu-plugin-kit`](https://github.com/lesmoutonssauvages/kitsu-plugin-kit).
 
 Repo: [lesmoutonssauvages/kitsu-injectedTickets](https://github.com/lesmoutonssauvages/kitsu-injectedTickets)
 
@@ -10,10 +11,15 @@ Repo: [lesmoutonssauvages/kitsu-injectedTickets](https://github.com/lesmoutonssa
 | | Official [kitsu-tickets](https://github.com/cgwire/kitsu-tickets) | [This package](https://github.com/lesmoutonssauvages/kitsu-injectedTickets) |
 |--|------------------------------------------------------------------|--------------|
 | UI | **Iframe** SPA (`frontend/dist/index.html`) | **Injected** (`frontend/dist/plugin.js`) |
-| Manifest | iframe (default) | `injected = true` |
+| How Zou detects mode | No `plugin.js` → iframe | `frontend/dist/plugin.js` present → `injected: true` in user context |
+| Manifest | `frontend_*_enabled` only | Same — **no** `injected` flag in `manifest.toml` |
 | Frontend kit | none — [plugin docs](https://dev.kitsu.cloud/kitsu-plugins/development) | [`kitsu-plugin-kit`](https://github.com/lesmoutonssauvages/kitsu-plugin-kit) |
 | Vue | own app in the iframe | host Vue / router / i18n / vuex |
-| Context | query params + hash router | host `useRoute().params` |
+| Context | query params + hash router | `usePluginContext()` + `useRoute().params` |
+
+There is **no** `injected = true` in `manifest.toml`. Zou derives injection from
+the presence of `PLUGIN_FOLDER/<id>/frontend/dist/plugin.js`. Without that file,
+Kitsu keeps the iframe integration.
 
 Backend layout matches the official plugin. Only frontend packaging and Kitsu
 integration change for inject.
@@ -25,11 +31,17 @@ Copy this tree, rename `injectedTickets`, adapt models and resources.
 [Kitsu Plugin Installation](https://dev.kitsu.cloud/kitsu-plugins/installation.html)
 
 ```bash
+# Clone or copy outside Zou's plugins install directory, then:
 zou install-plugin --path ./injectedTickets
 # or: zou install-plugin --path https://github.com/lesmoutonssauvages/kitsu-injectedTickets.git
 ```
 
 Restart Zou after install.
+
+Do **not** run `install-plugin` from a path that is already bind-mounted (or
+identical) to `site-packages/zou/plugins/<id>`: `shutil.copytree` then fails
+with “are the same file”. Install from a distinct source directory, or rely on
+the volume mount and only run migrations / restart.
 
 ## Structure
 
@@ -48,7 +60,7 @@ injectedTickets/
       views/
       components/
       composables/          # API, host Vuex catalogs, scope
-    vite.config.ts
+    vite.config.ts          # defineKitsuPluginConfig()
     dist/plugin.js          # served by Zou to Kitsu
   logo.png
 ```
@@ -57,13 +69,13 @@ injectedTickets/
 
 ```toml
 id = "injectedTickets"
-frontend_project_enabled = true
-frontend_studio_enabled = true
+name = "Injected Tickets"
+frontend_project_enabled = true   # production topbar section
+frontend_studio_enabled = true    # studio sidebar
 icon = "ticket-check"
-injected = true
 ```
 
-Without `injected = true`, Kitsu expects `frontend/dist/index.html` (iframe).
+Navigation chrome still comes from these flags. Injection mode does not.
 
 ## Tables
 
@@ -98,17 +110,29 @@ serialization.
 
 ## Frontend (injected)
 
-Vue 3 + Vite library build via `kitsu-plugin-kit`. The plugin is TypeScript
-and uses `definePlugin()` / `defineKitsuPluginConfig()`, same as the other
-injected plugins in this monorepo.
+Vue 3 + Vite library build via `kitsu-plugin-kit`. Entry uses `definePlugin()`;
+Vite uses `defineKitsuPluginConfig()` (plugin id from `../manifest.toml`).
 
 | Piece | Role |
 |-------|------|
-| `src/index.ts` | `definePlugin({ messages, routes })` — id from `manifest.toml` via Vite |
-| Context | `useTicketsScope()` (studio / production / episode) |
-| Navigation | Vue Router `{ name: 'list' }` / `'new'` / `'detail'` |
+| `src/index.ts` | `definePlugin({ messages, routes })` |
+| Scope | `useTicketsScope()` → `usePluginContext()` + route params |
+| Navigation | short names `list` / `new` / `detail` (host namespaces them) |
+| Current page | `route.meta.pluginPage` |
 | Catalogs | host Vuex via `useHostCatalogs()` |
 | Served as | `/api/plugins/injectedTickets/frontend/plugin.js` |
+
+### Routes (scopes)
+
+| Scope | Kitsu parent | URL |
+|-------|--------------|-----|
+| `studio` | `plugin` | `/plugins/injectedTickets/...` |
+| `production` | `production-plugin` | `/productions/:production_id/plugins/injectedTickets/...` |
+| `episode` | `episode-production-plugin` | `/productions/:production_id/episodes/:episode_id/plugins/injectedTickets/...` |
+
+If `episode` is **omitted**, the kit copies `production` routes
+(`episode ??= production`). This plugin declares all three scopes on purpose
+(same pages; tickets filter by episode when on an episode URL).
 
 ```ts
 export default definePlugin({
@@ -117,18 +141,29 @@ export default definePlugin({
 })
 ```
 
+To disable episode-scoped pages for another plugin, pass `episode: []`
+(empty array — omitting is not enough).
+
+### Build / dev
+
 ```bash
 pnpm install                                              # from monorepo root
 pnpm -F injected-tickets-plugin-frontend build            # dist/plugin.js
 pnpm -F injected-tickets-plugin-frontend dev              # Vite on :5175
 ```
 
+Point Kitsu at the Vite entry (host must support `KITSU_PLUGIN_DEV_URLS`):
+
 ```bash
 KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/index.ts' \
-  pnpm -F kitsu dev
+  npm run dev   # in the Kitsu app
 ```
 
-Details: `frontend/README.md` and [kitsu-plugin-kit](https://github.com/lesmoutonssauvages/kitsu-plugin-kit).
+HMR still needs a `frontend/dist/plugin.js` on disk (built file or stub) so Zou
+returns `"injected": true`. Dev URLs only replace *what* is loaded.
+
+Details: [`frontend/README.md`](frontend/README.md) and
+[kitsu-plugin-kit](https://github.com/lesmoutonssauvages/kitsu-plugin-kit).
 
 ## Testing
 
