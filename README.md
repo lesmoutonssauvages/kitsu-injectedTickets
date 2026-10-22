@@ -167,6 +167,10 @@ export default definePlugin({
 To disable episode-scoped pages for another plugin, pass `episode: []`
 (empty array — omitting is not enough).
 
+![image](./readmeIllustration/injected-list.png)
+
+![image](./readmeIllustration/injected-ticketId.png)
+
 ### Build / dev
 
 ```bash
@@ -188,6 +192,8 @@ KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/plugin.js' \
   npm run dev
 # e.g. https://host:5175 or a custom entry path
 ```
+
+![image](./readmeIllustration/injected.gif)
 
 HMR still needs a `frontend/dist/plugin.js` on disk (built file or stub) so Zou
 returns `"injected": true`. Dev URLs only replace *what* is loaded.
