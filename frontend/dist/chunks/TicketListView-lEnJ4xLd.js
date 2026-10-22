@@ -1,6 +1,7 @@
-import { A as e, C as t, D as n, E as r, T as i, _ as a, b as o, c as s, f as c, g as l, h as u, i as d, j as f, l as p, m, n as h, o as g, p as _, s as v, t as y, v as b, w as x, x as S, y as C } from "./useTicketsScope-n5nu5bJk.js";
-//#region ../../../node_modules/.pnpm/lucide-vue-next@1.0.0_vue@3.5.41_typescript@6.0.3_/node_modules/lucide-vue-next/dist/esm/icons/calendar-clock.js
-var w = v("calendar-clock", [
+import { C as e, _ as t, a as n, b as r, c as i, d as a, f as o, g as s, l as c, m as l, n as u, o as d, s as f, u as p, v as m, w as h, y as g } from "./front-CmhxG6ng.js";
+import { c as _, i as v, n as y, o as b, s as x, t as S } from "./useTicketsScope-DsHHTSV5.js";
+// node_modules/lucide-vue-next/dist/esm/icons/calendar-clock.js
+var C = x("calendar-clock", [
 	["path", {
 		d: "M16 14v2.2l1.6 1",
 		key: "fo4ql5"
@@ -27,7 +28,7 @@ var w = v("calendar-clock", [
 		r: "6",
 		key: "qoo3c4"
 	}]
-]), T = v("calendar-plus", [
+]), w = x("calendar-plus", [
 	["path", {
 		d: "M16 19h6",
 		key: "xwg31i"
@@ -52,7 +53,7 @@ var w = v("calendar-clock", [
 		d: "M8 2v4",
 		key: "1cmpym"
 	}]
-]), E = v("clipboard-list", [
+]), T = x("clipboard-list", [
 	["rect", {
 		width: "8",
 		height: "4",
@@ -82,7 +83,7 @@ var w = v("calendar-clock", [
 		d: "M8 16h.01",
 		key: "18s6g9"
 	}]
-]), D = v("factory", [
+]), E = x("factory", [
 	["path", {
 		d: "M12 16h.01",
 		key: "1drbdi"
@@ -99,19 +100,19 @@ var w = v("calendar-clock", [
 		d: "M8 16h.01",
 		key: "18s6g9"
 	}]
-]), O = v("pencil", [["path", {
+]), D = x("pencil", [["path", {
 	d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
 	key: "1a8usu"
 }], ["path", {
 	d: "m15 5 4 4",
 	key: "1mk7zo"
-}]]), k = v("plus", [["path", {
+}]]), O = x("plus", [["path", {
 	d: "M5 12h14",
 	key: "1ays0h"
 }], ["path", {
 	d: "M12 5v14",
 	key: "s699le"
-}]]), A = v("ticket", [
+}]]), k = x("ticket", [
 	["path", {
 		d: "M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z",
 		key: "qn84l0"
@@ -128,7 +129,7 @@ var w = v("calendar-clock", [
 		d: "M13 11v2",
 		key: "1wjjxi"
 	}]
-]), j = v("trash-2", [
+]), A = x("trash-2", [
 	["path", {
 		d: "M10 11v6",
 		key: "nco0om"
@@ -149,7 +150,7 @@ var w = v("calendar-clock", [
 		d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
 		key: "e791ji"
 	}]
-]), M = v("tv", [["path", {
+]), j = x("tv", [["path", {
 	d: "m17 2-5 5-5-5",
 	key: "16satq"
 }], ["rect", {
@@ -159,7 +160,7 @@ var w = v("calendar-clock", [
 	y: "7",
 	rx: "2",
 	key: "1e6viu"
-}]]), N = v("user-check", [
+}]]), M = x("user-check", [
 	["path", {
 		d: "m16 11 2 2 4-4",
 		key: "9rsbq5"
@@ -174,7 +175,7 @@ var w = v("calendar-clock", [
 		r: "4",
 		key: "nufk8"
 	}]
-]), P = v("user-plus", [
+]), N = x("user-plus", [
 	["path", {
 		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
 		key: "1yyitq"
@@ -199,29 +200,29 @@ var w = v("calendar-clock", [
 		y2: "11",
 		key: "1shjgl"
 	}]
-]), F = {
+]), P = {
 	key: 0,
 	class: "empty-state"
-}, I = { class: "empty-text" }, L = {
+}, F = { class: "empty-text" }, I = {
 	key: 1,
 	class: "tickets-list"
-}, R = { class: "ticket-content" }, z = { class: "ticket-header" }, B = { class: "ticket-title" }, V = { class: "ticket-actions" }, H = [
+}, L = { class: "ticket-content" }, R = { class: "ticket-header" }, z = { class: "ticket-title" }, B = { class: "ticket-actions" }, V = [
 	"disabled",
 	"title",
 	"onClick"
-], ee = {
+], H = {
 	key: 0,
 	class: "ticket-text"
-}, te = { class: "ticket-footer" }, ne = { class: "ticket-meta" }, re = {
+}, ee = { class: "ticket-footer" }, te = { class: "ticket-meta" }, ne = {
 	key: 0,
 	class: "meta-item"
-}, ie = { class: "meta-label" }, ae = { class: "meta-value" }, oe = {
+}, re = { class: "meta-label" }, ie = { class: "meta-value" }, ae = {
 	key: 1,
 	class: "meta-item"
-}, se = { class: "meta-label" }, ce = { class: "meta-value" }, le = {
+}, oe = { class: "meta-label" }, se = { class: "meta-value" }, ce = {
 	key: 2,
 	class: "meta-item"
-}, U = { class: "meta-label" }, W = { class: "meta-value" }, ue = {
+}, le = { class: "meta-label" }, U = { class: "meta-value" }, ue = {
 	key: 3,
 	class: "meta-item"
 }, de = { class: "meta-label" }, fe = { class: "meta-value" }, pe = {
@@ -233,34 +234,46 @@ var w = v("calendar-clock", [
 }, _e = { class: "meta-label" }, ve = { class: "meta-value" }, ye = { class: "ticket-dates" }, be = {
 	key: 0,
 	class: "ticket-date"
-}, xe = { class: "meta-label" }, G = {
+}, xe = { class: "meta-label" }, Se = {
 	key: 1,
 	class: "ticket-date"
-}, Se = { class: "meta-label" }, Ce = { class: "tickets-count footer-count" }, we = { class: "modal-content" }, Te = { class: "box" }, Ee = { class: "text" }, De = { class: "has-text-right" }, K = /*#__PURE__*/ h(/* @__PURE__ */ o({
+}, Ce = { class: "meta-label" }, W = { class: "tickets-count footer-count" }, we = { class: "modal-content" }, Te = { class: "box" }, Ee = { class: "text" }, De = { class: "has-text-right" }, G = /*#__PURE__*/ y({
 	__name: "TicketList",
 	props: {
-		tickets: {},
-		productions: {},
-		people: {},
-		deletingTicketId: {}
+		tickets: {
+			type: Array,
+			required: !0
+		},
+		productions: {
+			type: Array,
+			required: !0
+		},
+		people: {
+			type: Array,
+			required: !0
+		},
+		deletingTicketId: {
+			type: String,
+			default: null
+		}
 	},
 	emits: ["delete"],
-	setup(e, { emit: o }) {
-		let d = e, m = o, { t: h } = s(), g = _(() => {
+	setup(e, { emit: a }) {
+		let f = e, v = a, { t: y } = _(), b = d(() => {
 			let e = {};
-			for (let t of d.productions) e[t.id] = t.name;
+			for (let t of f.productions) e[t.id] = t.name;
 			return e;
-		}), v = _(() => {
+		}), x = d(() => {
 			let e = {};
-			for (let t of d.people) e[t.id] = t.full_name;
+			for (let t of f.people) e[t.id] = t.full_name;
 			return e;
-		}), y = x(!1), b = x(null), k = (e) => {
-			b.value = e, y.value = !0;
+		}), S = t(!1), O = t(null), G = (e) => {
+			O.value = e, S.value = !0;
 		}, K = () => {
-			y.value = !1, b.value = null;
+			S.value = !1, O.value = null;
 		}, q = () => {
-			let e = b.value;
-			y.value = !1, b.value = null, e && m("delete", e);
+			let e = O.value;
+			S.value = !1, O.value = null, e && v("delete", e);
 		}, J = (e) => {
 			if (!e) return "";
 			let t = e.toLowerCase();
@@ -272,7 +285,7 @@ var w = v("calendar-clock", [
 				"on hold": "tickets.status.on_hold",
 				closed: "tickets.status.closed"
 			}[e.toLowerCase()];
-			return t ? h(t) : e;
+			return t ? y(t) : e;
 		}, X = (e) => {
 			if (!e) return "";
 			try {
@@ -286,133 +299,133 @@ var w = v("calendar-clock", [
 			} catch {
 				return e;
 			}
-		}, Z = (e) => e ? `${e.substring(0, 8)}…` : "", Q = (e) => e && g.value[e] || Z(e), $ = (e) => e && v.value[e] || Z(e);
-		return (o, s) => (t(), l(c, null, [e.tickets.length === 0 ? (t(), l("div", F, [C(n(A), {
+		}, Z = (e) => e ? `${e.substring(0, 8)}…` : "", Q = (e) => e && b.value[e] || Z(e), $ = (e) => e && x.value[e] || Z(e);
+		return (t, a) => (s(), c(n, null, [e.tickets.length === 0 ? (s(), c("div", P, [o(r(k), {
 			size: 48,
 			class: "empty-icon"
-		}), a("p", I, r(n(h)("tickets.no_tickets")), 1)])) : (t(), l("div", L, [(t(!0), l(c, null, i(e.tickets, (i) => (t(), l("article", {
-			key: i.id,
+		}), p("p", F, g(r(y)("tickets.no_tickets")), 1)])) : (s(), c("div", I, [(s(!0), c(n, null, m(e.tickets, (t) => (s(), c("article", {
+			key: t.id,
 			class: "ticket-card"
-		}, [a("div", R, [
-			a("div", z, [a("h3", B, r(i.title || n(h)("tickets.untitled")), 1), a("div", V, [
-				a("span", { class: S(["tag ticket-status-tag", J(i.status)]) }, r(Y(i.status)), 3),
-				C(n(p), {
+		}, [p("div", L, [
+			p("div", R, [p("h3", z, g(t.title || r(y)("tickets.untitled")), 1), p("div", B, [
+				p("span", { class: l(["tag ticket-status-tag", J(t.status)]) }, g(Y(t.status)), 3),
+				o(r(u), {
 					class: "icon-button",
 					to: {
 						name: "detail",
-						params: { ticketId: i.id }
+						params: { ticketId: t.id }
 					},
-					title: n(h)("main.edit")
+					title: r(y)("main.edit")
 				}, {
-					default: f(() => [C(n(O), { size: 16 })]),
+					default: h(() => [o(r(D), { size: 16 })]),
 					_: 1
 				}, 8, ["to", "title"]),
-				a("button", {
+				p("button", {
 					type: "button",
-					class: S(["icon-button is-danger", { "is-loading": e.deletingTicketId === i.id }]),
-					disabled: e.deletingTicketId === i.id,
-					title: n(h)("main.delete"),
-					onClick: (e) => k(i)
-				}, [C(n(j), { size: 16 })], 10, H)
+					class: l(["icon-button is-danger", { "is-loading": e.deletingTicketId === t.id }]),
+					disabled: e.deletingTicketId === t.id,
+					title: r(y)("main.delete"),
+					onClick: (e) => G(t)
+				}, [o(r(A), { size: 16 })], 10, V)
 			])]),
-			i.text ? (t(), l("p", ee, r(i.text), 1)) : u("", !0),
-			a("div", te, [a("div", ne, [
-				i.task_id ? (t(), l("span", re, [
-					C(n(E), {
+			t.text ? (s(), c("p", H, g(t.text), 1)) : i("", !0),
+			p("div", ee, [p("div", te, [
+				t.task_id ? (s(), c("span", ne, [
+					o(r(T), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", ie, r(n(h)("tickets.fields.task")), 1),
-					a("span", ae, r(Z(i.task_id)), 1)
-				])) : u("", !0),
-				i.person_id ? (t(), l("span", oe, [
-					C(n(P), {
+					p("span", re, g(r(y)("tickets.fields.task")), 1),
+					p("span", ie, g(Z(t.task_id)), 1)
+				])) : i("", !0),
+				t.person_id ? (s(), c("span", ae, [
+					o(r(N), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", se, r(n(h)("tickets.fields.created_by")), 1),
-					a("span", ce, r($(i.person_id)), 1)
-				])) : u("", !0),
-				i.assignee_id ? (t(), l("span", le, [
-					C(n(N), {
+					p("span", oe, g(r(y)("tickets.fields.created_by")), 1),
+					p("span", se, g($(t.person_id)), 1)
+				])) : i("", !0),
+				t.assignee_id ? (s(), c("span", ce, [
+					o(r(M), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", U, r(n(h)("tickets.fields.assigned_to")), 1),
-					a("span", W, r($(i.assignee_id)), 1)
-				])) : u("", !0),
-				i.project_id ? (t(), l("span", ue, [
-					C(n(D), {
+					p("span", le, g(r(y)("tickets.fields.assigned_to")), 1),
+					p("span", U, g($(t.assignee_id)), 1)
+				])) : i("", !0),
+				t.project_id ? (s(), c("span", ue, [
+					o(r(E), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", de, r(n(h)("tickets.fields.production")), 1),
-					a("span", fe, r(Q(i.project_id)), 1)
-				])) : u("", !0),
-				i.episode_name || i.episode_id ? (t(), l("span", pe, [
-					C(n(M), {
+					p("span", de, g(r(y)("tickets.fields.production")), 1),
+					p("span", fe, g(Q(t.project_id)), 1)
+				])) : i("", !0),
+				t.episode_name || t.episode_id ? (s(), c("span", pe, [
+					o(r(j), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", me, r(n(h)("tickets.fields.episode")), 1),
-					a("span", he, r(i.episode_name || Z(i.episode_id)), 1)
-				])) : u("", !0),
-				i.sequence_name ? (t(), l("span", ge, [
-					C(n(E), {
+					p("span", me, g(r(y)("tickets.fields.episode")), 1),
+					p("span", he, g(t.episode_name || Z(t.episode_id)), 1)
+				])) : i("", !0),
+				t.sequence_name ? (s(), c("span", ge, [
+					o(r(T), {
 						size: 16,
 						class: "meta-icon"
 					}),
-					a("span", _e, r(n(h)("tickets.fields.sequence")), 1),
-					a("span", ve, r(i.sequence_name), 1)
-				])) : u("", !0)
-			]), a("div", ye, [i.created_at ? (t(), l("div", be, [
-				C(n(T), {
+					p("span", _e, g(r(y)("tickets.fields.sequence")), 1),
+					p("span", ve, g(t.sequence_name), 1)
+				])) : i("", !0)
+			]), p("div", ye, [t.created_at ? (s(), c("div", be, [
+				o(r(w), {
 					size: 16,
 					class: "meta-icon"
 				}),
-				a("span", xe, r(n(h)("tickets.fields.created")), 1),
-				a("span", null, r(X(i.created_at)), 1)
-			])) : u("", !0), i.updated_at ? (t(), l("div", G, [
-				C(n(w), {
+				p("span", xe, g(r(y)("tickets.fields.created")), 1),
+				p("span", null, g(X(t.created_at)), 1)
+			])) : i("", !0), t.updated_at ? (s(), c("div", Se, [
+				o(r(C), {
 					size: 16,
 					class: "meta-icon"
 				}),
-				a("span", Se, r(n(h)("tickets.fields.updated")), 1),
-				a("span", null, r(X(i.updated_at)), 1)
-			])) : u("", !0)])])
-		])]))), 128)), a("p", Ce, r(n(h)("tickets.count", e.tickets.length)), 1)])), a("div", { class: S(["modal delete-modal", { "is-active": y.value }]) }, [a("div", {
+				p("span", Ce, g(r(y)("tickets.fields.updated")), 1),
+				p("span", null, g(X(t.updated_at)), 1)
+			])) : i("", !0)])])
+		])]))), 128)), p("p", W, g(r(y)("tickets.count", e.tickets.length)), 1)])), p("div", { class: l(["modal delete-modal", { "is-active": S.value }]) }, [p("div", {
 			class: "modal-background",
 			onClick: K
-		}), a("div", we, [a("div", Te, [a("p", Ee, r(n(h)("tickets.delete.confirm_message")), 1), a("p", De, [a("button", {
+		}), p("div", we, [p("div", Te, [p("p", Ee, g(r(y)("tickets.delete.confirm_message")), 1), p("p", De, [p("button", {
 			type: "button",
 			class: "button is-danger",
 			onClick: q
-		}, r(n(h)("tickets.delete.confirm")), 1), a("button", {
+		}, g(r(y)("tickets.delete.confirm")), 1), p("button", {
 			type: "button",
 			class: "button is-link",
 			onClick: K
-		}, r(n(h)("tickets.delete.cancel")), 1)])])])], 2)], 64));
+		}, g(r(y)("tickets.delete.cancel")), 1)])])])], 2)], 64));
 	}
-}), [["__scopeId", "data-v-f76b2650"]]), q = { class: "tickets-plugin" }, J = { class: "tickets-header" }, Y = { class: "header-content" }, X = { class: "tickets-title" }, Z = {
+}, [["__scopeId", "data-v-617db2de"]]), K = { class: "tickets-plugin" }, q = { class: "tickets-header" }, J = { class: "header-content" }, Y = { class: "tickets-title" }, X = {
 	key: 0,
 	class: "tickets-count"
-}, Q = { key: 0 }, $ = { class: "icon is-small" }, Oe = {
+}, Z = { key: 0 }, Q = { class: "icon is-small" }, $ = {
 	key: 0,
 	class: "has-text-centered mt2"
-}, ke = {
+}, Oe = {
 	key: 1,
 	class: "has-text-centered mt2"
-}, Ae = { class: "tag is-danger" }, je = /*#__PURE__*/ h(/* @__PURE__ */ o({
+}, ke = { class: "tag is-danger" }, Ae = /*#__PURE__*/ y({
 	__name: "TicketListView",
-	setup(i) {
-		let { t: o } = s(), c = d(), { openProductions: h, people: v, episodeNameById: S, ensureHostCatalogs: w, loadEpisodes: T, getCachedTask: E, loadTask: D } = g(), { productionId: O, episodeId: A } = y(), j = x([]), M = x(!0), N = x(!1), P = x(null), F = x({}), I = _(() => !O.value), L = _(() => j.value.filter((e) => !(O.value && e.project_id !== O.value || A.value && e.episode_id !== A.value)).sort((e, t) => {
+	setup(n) {
+		let { t: l } = _(), m = v(), { openProductions: y, people: x, episodeNameById: C, ensureHostCatalogs: w, loadEpisodes: T, getCachedTask: E, loadTask: D } = b(), { productionId: k, episodeId: A } = S(), j = t([]), M = t(!0), N = t(!1), P = t(null), F = t({}), I = d(() => !k.value), L = d(() => j.value.filter((e) => !(k.value && e.project_id !== k.value || A.value && e.episode_id !== A.value)).sort((e, t) => {
 			let n = e.created_at ? Date.parse(e.created_at) : 0;
 			return (t.created_at ? Date.parse(t.created_at) : 0) - n;
-		})), R = _(() => L.value.map((e) => {
+		})), R = d(() => L.value.map((e) => {
 			let t = e.task_id ? F.value[e.task_id] : null;
 			return {
 				...e,
-				episode_name: e.episode_id && S.value[e.episode_id] || t?.episode_name || null,
+				episode_name: e.episode_id && C.value[e.episode_id] || t?.episode_name || null,
 				sequence_name: t?.sequence_name || null
 			};
 		})), z = (e) => {
@@ -447,7 +460,7 @@ var w = v("calendar-clock", [
 			M.value = !0, N.value = !1;
 			try {
 				await w();
-				let e = await c.fetchTickets(O.value, A.value);
+				let e = await m.fetchTickets(k.value, A.value);
 				if (!Array.isArray(e)) throw Error(e?.message || "Unexpected tickets response");
 				j.value = e, await B(j.value);
 			} catch (e) {
@@ -458,26 +471,26 @@ var w = v("calendar-clock", [
 		}, H = async (e) => {
 			P.value = e.id;
 			try {
-				await c.deleteTicket(e.id), j.value = j.value.filter((t) => t.id !== e.id);
+				await m.deleteTicket(e.id), j.value = j.value.filter((t) => t.id !== e.id);
 			} catch (e) {
 				console.error("Error deleting ticket:", e);
 			} finally {
 				P.value = null;
 			}
 		};
-		return e([O, A], () => {
+		return e([k, A], () => {
 			V();
-		}, { immediate: !0 }), (e, i) => (t(), l("div", q, [a("div", J, [a("div", Y, [a("div", null, [a("h1", X, r(n(o)("tickets.title")), 1), !M.value && !N.value ? (t(), l("p", Z, [b(r(n(o)("tickets.count", L.value.length)) + " ", 1), I.value ? (t(), l("span", Q, r(n(o)("tickets.all_productions")), 1)) : u("", !0)])) : u("", !0)]), C(n(p), {
+		}, { immediate: !0 }), (e, t) => (s(), c("div", K, [p("div", q, [p("div", J, [p("div", null, [p("h1", Y, g(r(l)("tickets.title")), 1), !M.value && !N.value ? (s(), c("p", X, [a(g(r(l)("tickets.count", L.value.length)) + " ", 1), I.value ? (s(), c("span", Z, g(r(l)("tickets.all_productions")), 1)) : i("", !0)])) : i("", !0)]), o(r(u), {
 			class: "button",
 			to: { name: "new" }
 		}, {
-			default: f(() => [a("span", $, [C(n(k), { size: 16 })]), a("span", null, r(n(o)("tickets.create.submit")), 1)]),
+			default: h(() => [p("span", Q, [o(r(O), { size: 16 })]), p("span", null, g(r(l)("tickets.create.submit")), 1)]),
 			_: 1
-		})])]), M.value ? (t(), l("p", Oe, r(n(o)("main.loading")), 1)) : N.value ? (t(), l("p", ke, [a("span", Ae, r(n(o)("main.loading_error")), 1)])) : (t(), m(K, {
+		})])]), M.value ? (s(), c("p", $, g(r(l)("main.loading")), 1)) : N.value ? (s(), c("p", Oe, [p("span", ke, g(r(l)("main.loading_error")), 1)])) : (s(), f(G, {
 			key: 2,
 			tickets: R.value,
-			productions: n(h),
-			people: n(v),
+			productions: r(y),
+			people: r(x),
 			"deleting-ticket-id": P.value,
 			onDelete: H
 		}, null, 8, [
@@ -487,8 +500,7 @@ var w = v("calendar-clock", [
 			"deleting-ticket-id"
 		]))]));
 	}
-}), [["__scopeId", "data-v-e1fb2cdb"]]);
-//#endregion
-export { je as default };
+}, [["__scopeId", "data-v-64bc69ed"]]);
+export { Ae as default };
 
-//# sourceMappingURL=TicketListView-BX-8hX0A.js.map
+//# sourceMappingURL=TicketListView-lEnJ4xLd.js.map

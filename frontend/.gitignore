@@ -2,6 +2,9 @@
 !dist
 dist-ssr
 node_modules
+# This package uses npm (package-lock.json). Ignore other lockfiles if present.
+pnpm-lock.yaml
+yarn.lock
 *.local
 .DS_Store
 

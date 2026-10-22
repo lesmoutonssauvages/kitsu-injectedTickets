@@ -1,60 +1,32 @@
-<script setup lang="ts">
-import { computed, ref, watch, type Ref } from 'vue'
+<script setup>
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
   sequenceEpisodeId,
   useHostCatalogs,
-  type HostEntityCatalogs,
-  type HostSequence,
-  type HostTask,
 } from '../composables/useHostCatalogs'
 import { asEpisodeId } from '../composables/useTicketsApi'
-import type { Production } from '../composables/useTicketsApi'
 
-const props = defineProps<{
-  projectId: string | null
-  taskId: string | null
-  disabled?: boolean
-}>()
+const props = defineProps({
+  projectId: { type: String, default: null },
+  taskId: { type: String, default: null },
+  disabled: { type: Boolean, default: false },
+})
 
-const emit = defineEmits<{
-  'update:taskId': [value: string | null]
-}>()
+const emit = defineEmits(['update:taskId'])
 
 const { t } = useI18n()
 const route = useRoute()
 const host = useHostCatalogs()
 
-type Named = { id: string; name: string }
-type Asset = { id: string; name: string; entity_type_id?: string }
-type Shot = {
-  id: string
-  name: string
-  sequence_id?: string
-  parent_id?: string
-}
-type Edit = {
-  id: string
-  name: string
-  episode_id?: string
-  parent_id?: string
-}
-type EntityTask = {
-  id: string
-  task_type_id?: string
-  task_type_name?: string
-  task_type?: { name: string }
-  entity_id?: string
-}
-
-const upsertById = <T extends { id: string }>(listRef: Ref<T[]>, item: T) => {
+const upsertById = (listRef, item) => {
   if (!item?.id) return
   if (listRef.value.some((entry) => entry.id === item.id)) return
   listRef.value = [...listRef.value, item]
 }
 
-const mergeTaskEntitiesIntoCatalog = (task: HostTask) => {
+const mergeTaskEntitiesIntoCatalog = (task) => {
   const entity = task.entity
   const entityTypeName = task.entity_type?.name || task.entity_type_name || ''
 
@@ -111,15 +83,15 @@ const mergeTaskEntitiesIntoCatalog = (task: HostTask) => {
   }
 }
 
-const project = ref<Production | null>(null)
-const taskTypeMap = ref<Record<string, string>>({})
-const assetTypes = ref<Named[]>([])
-const assets = ref<Asset[]>([])
-const shots = ref<Shot[]>([])
-const sequences = ref<HostSequence[]>([])
-const episodes = ref<Named[]>([])
-const edits = ref<Edit[]>([])
-const tasks = ref<EntityTask[]>([])
+const project = ref(null)
+const taskTypeMap = ref({})
+const assetTypes = ref([])
+const assets = ref([])
+const shots = ref([])
+const sequences = ref([])
+const episodes = ref([])
+const edits = ref([])
+const tasks = ref([])
 
 const selectedEntityType = ref('')
 const selectedAssetTypeId = ref('')
@@ -151,9 +123,8 @@ const entityTypeOptions = computed(() => {
   return options
 })
 
-const sortedOptions = <T extends { label: string; value: string }>(
-  items: T[],
-) => [...items].sort((a, b) => a.label.localeCompare(b.label))
+const sortedOptions = (items) =>
+  [...items].sort((a, b) => a.label.localeCompare(b.label))
 
 const assetTypeOptions = computed(() =>
   sortedOptions(
@@ -218,7 +189,7 @@ const taskOptions = computed(() =>
   })),
 )
 
-const applyCatalog = (catalog: HostEntityCatalogs) => {
+const applyCatalog = (catalog) => {
   assetTypes.value = catalog.assetTypes
   assets.value = catalog.assets
   shots.value = catalog.shots
@@ -243,7 +214,7 @@ const resetAll = () => {
   tasks.value = []
 }
 
-const resetBelow = (level: number) => {
+const resetBelow = (level) => {
   if (level <= 1) {
     selectedAssetTypeId.value = ''
     selectedEpisodeId.value = ''
@@ -268,7 +239,7 @@ const fetchEntityData = async () => {
   }
 }
 
-const initializeFromTaskId = async (taskId: string) => {
+const initializeFromTaskId = async (taskId) => {
   if (!taskId || !props.projectId) return
   try {
     const task = await host.loadTask(taskId)
@@ -366,7 +337,7 @@ const initializeFromTaskId = async (taskId: string) => {
       }
     }
 
-    let entityTasks: EntityTask[] = []
+    let entityTasks = []
     try {
       entityTasks = await host.loadTasksForEntity(entityId)
     } catch (error) {
@@ -406,7 +377,7 @@ watch(
     isLoadingProject.value = true
     try {
       project.value = await host.ensureProduction(newId)
-      const map: Record<string, string> = {}
+      const map = {}
       for (const tt of host.taskTypesFor(newId)) map[tt.id] = tt.name
       taskTypeMap.value = map
       if (props.taskId && project.value) {

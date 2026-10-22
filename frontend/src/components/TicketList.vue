@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -14,37 +14,34 @@ import {
   UserCheck,
   UserPlus,
 } from 'lucide-vue-next'
-import type { Person, Production, Ticket as TicketRecord } from '../composables/useTicketsApi'
 
-const props = defineProps<{
-  tickets: TicketRecord[]
-  productions: Production[]
-  people: Person[]
-  deletingTicketId: string | null
-}>()
+const props = defineProps({
+  tickets: { type: Array, required: true },
+  productions: { type: Array, required: true },
+  people: { type: Array, required: true },
+  deletingTicketId: { type: String, default: null },
+})
 
-const emit = defineEmits<{
-  delete: [ticket: TicketRecord]
-}>()
+const emit = defineEmits(['delete'])
 
 const { t } = useI18n()
 
 const productionMap = computed(() => {
-  const map: Record<string, string> = {}
+  const map = {}
   for (const p of props.productions) map[p.id] = p.name
   return map
 })
 
 const personMap = computed(() => {
-  const map: Record<string, string> = {}
+  const map = {}
   for (const p of props.people) map[p.id] = p.full_name
   return map
 })
 
 const isDeleteOpen = ref(false)
-const ticketToDelete = ref<TicketRecord | null>(null)
+const ticketToDelete = ref(null)
 
-const confirmDelete = (ticket: TicketRecord) => {
+const confirmDelete = ticket => {
   ticketToDelete.value = ticket
   isDeleteOpen.value = true
 }
@@ -61,7 +58,7 @@ const handleDelete = () => {
   if (ticket) emit('delete', ticket)
 }
 
-const statusTagClass = (status?: string) => {
+const statusTagClass = status => {
   if (!status) return ''
   const s = status.toLowerCase()
   if (s === 'open') return 'is-open'
@@ -70,9 +67,9 @@ const statusTagClass = (status?: string) => {
   return ''
 }
 
-const formatStatus = (status?: string) => {
+const formatStatus = status => {
   if (!status) return ''
-  const map: Record<string, string> = {
+  const map = {
     open: 'tickets.status.open',
     'on hold': 'tickets.status.on_hold',
     closed: 'tickets.status.closed',
@@ -81,7 +78,7 @@ const formatStatus = (status?: string) => {
   return key ? t(key) : status
 }
 
-const formatDate = (dateString?: string) => {
+const formatDate = dateString => {
   if (!dateString) return ''
   try {
     return new Date(dateString).toLocaleDateString(undefined, {
@@ -96,12 +93,10 @@ const formatDate = (dateString?: string) => {
   }
 }
 
-const formatId = (id?: string | null) => (id ? `${id.substring(0, 8)}…` : '')
+const formatId = id => (id ? `${id.substring(0, 8)}…` : '')
 
-const productionName = (id?: string | null) =>
-  (id && productionMap.value[id]) || formatId(id)
-const personName = (id?: string | null) =>
-  (id && personMap.value[id]) || formatId(id)
+const productionName = id => (id && productionMap.value[id]) || formatId(id)
+const personName = id => (id && personMap.value[id]) || formatId(id)
 </script>
 
 <template>
