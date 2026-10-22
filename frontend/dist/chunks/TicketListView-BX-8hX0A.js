@@ -1,5 +1,5 @@
-import { A as e, C as t, D as n, E as r, T as i, _ as a, b as o, c as s, f as c, g as l, h as u, i as d, j as f, l as p, m, n as h, o as g, p as _, s as v, t as y, v as b, w as x, x as S, y as C } from "./useTicketsScope-DJOhA3PJ.js";
-//#region ../../../node_modules/.pnpm/lucide-vue-next@0.525.0_vue@3.5.41_typescript@6.0.3_/node_modules/lucide-vue-next/dist/esm/icons/calendar-clock.js
+import { A as e, C as t, D as n, E as r, T as i, _ as a, b as o, c as s, f as c, g as l, h as u, i as d, j as f, l as p, m, n as h, o as g, p as _, s as v, t as y, v as b, w as x, x as S, y as C } from "./useTicketsScope-n5nu5bJk.js";
+//#region ../../../node_modules/.pnpm/lucide-vue-next@1.0.0_vue@3.5.41_typescript@6.0.3_/node_modules/lucide-vue-next/dist/esm/icons/calendar-clock.js
 var w = v("calendar-clock", [
 	["path", {
 		d: "M16 14v2.2l1.6 1",
@@ -130,30 +130,24 @@ var w = v("calendar-clock", [
 	}]
 ]), j = v("trash-2", [
 	["path", {
+		d: "M10 11v6",
+		key: "nco0om"
+	}],
+	["path", {
+		d: "M14 11v6",
+		key: "outv1u"
+	}],
+	["path", {
+		d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6",
+		key: "miytrc"
+	}],
+	["path", {
 		d: "M3 6h18",
 		key: "d0wm0j"
 	}],
 	["path", {
-		d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6",
-		key: "4alrt4"
-	}],
-	["path", {
-		d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2",
-		key: "v07s0e"
-	}],
-	["line", {
-		x1: "10",
-		x2: "10",
-		y1: "11",
-		y2: "17",
-		key: "1uufr5"
-	}],
-	["line", {
-		x1: "14",
-		x2: "14",
-		y1: "11",
-		y2: "17",
-		key: "xtxkd"
+		d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
+		key: "e791ji"
 	}]
 ]), M = v("tv", [["path", {
 	d: "m17 2-5 5-5-5",
@@ -497,4 +491,4 @@ var w = v("calendar-clock", [
 //#endregion
 export { je as default };
 
-//# sourceMappingURL=TicketListView-BL1AUYdA.js.map
+//# sourceMappingURL=TicketListView-BX-8hX0A.js.map

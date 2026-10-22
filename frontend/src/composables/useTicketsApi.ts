@@ -1,5 +1,5 @@
-import { usePluginContext } from 'kitsu-plugin-kit'
-import kitsuClient from 'kitsu-client-js'
+import { usePluginContext } from '@lesmoutonssauvages/kitsu-plugin-kit'
+import { createClient, type KitsuClient } from '@cgwire/kitsu-client'
 
 const ticketsApiPath = (pluginId: string): string =>
   `/plugins/${pluginId}/tickets`
@@ -64,64 +64,55 @@ const sanitizeTicketPayload = (
   episode_id: asEpisodeId(data.episode_id),
 })
 
-type KitsuJsClient = {
-  get: (path: string) => Promise<unknown>
-  post: (path: string, payload: unknown) => Promise<unknown>
-  put: (path: string, payload: unknown) => Promise<unknown>
-  delete: (path: string) => Promise<unknown>
-  api: {
-    deleteHeader: (header: string) => void
-    axiosInstance: { defaults: { withCredentials: boolean } }
-  }
-}
+let clientInstance: KitsuClient | null = null
 
-let clientInstance: KitsuJsClient | null = null
-
-const getClient = (): KitsuJsClient => {
+const getClient = (): KitsuClient => {
   if (!clientInstance) {
-    clientInstance = kitsuClient.createClient('/api') as KitsuJsClient
-    // Browsers forbid setting User-Agent on XHR; kitsu-client-js sets it for Node.
-    clientInstance.api.deleteHeader('User-Agent')
-    clientInstance.api.axiosInstance.defaults.withCredentials = true
+    // Cookie auth: plugin runs inside Kitsu, reuse the browser session.
+    clientInstance = createClient({ host: '/api', auth: 'cookie' })
   }
   return clientInstance
 }
 
-/** Plugin-owned tickets API via kitsu-client-js — host catalogs come from Vuex. */
+/** Plugin-owned tickets API via @cgwire/kitsu-client — host catalogs come from Vuex. */
 export const useTicketsApi = () => {
   const context = usePluginContext()
-  const client = getClient()
+  const { http } = getClient()
   const apiBase = () => ticketsApiPath(context.value?.pluginId ?? '')
 
   const fetchTickets = (
     productionId?: string | null,
     episodeId?: string | null,
   ) => {
-    const params = new URLSearchParams()
-    if (productionId) params.set('production_id', productionId)
+    const query: Record<string, string> = {}
+    if (productionId) query.production_id = productionId
     const ep = asEpisodeId(episodeId)
-    if (ep) params.set('episode_id', ep)
-    const q = params.toString()
-    return client.get(`${apiBase()}${q ? `?${q}` : ''}`) as Promise<Ticket[]>
+    if (ep) query.episode_id = ep
+    return http.get(apiBase(), query, {}) as Promise<Ticket[]>
   }
 
   const getTicket = (ticketId: string) =>
-    client.get(`${apiBase()}/${ticketId}`) as Promise<Ticket>
+    http.get(`${apiBase()}/${ticketId}`, undefined, {}) as Promise<Ticket>
 
   const createTicket = (ticketData: Partial<TicketPayload>) =>
-    client.post(apiBase(), sanitizeTicketPayload(ticketData)) as Promise<Ticket>
+    http.post(
+      apiBase(),
+      sanitizeTicketPayload(ticketData),
+      {},
+    ) as Promise<Ticket>
 
   const updateTicket = (
     ticketId: string,
     ticketData: Partial<TicketPayload>,
   ) =>
-    client.put(
+    http.put(
       `${apiBase()}/${ticketId}`,
       sanitizeTicketPayload(ticketData),
+      {},
     ) as Promise<Ticket>
 
   const deleteTicket = (ticketId: string) =>
-    client.delete(`${apiBase()}/${ticketId}`) as Promise<void>
+    http.del(`${apiBase()}/${ticketId}`, undefined, {}) as Promise<void>
 
   return {
     fetchTickets,

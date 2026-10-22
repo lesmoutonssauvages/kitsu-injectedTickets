@@ -1,4 +1,4 @@
-import { usePluginContext } from 'kitsu-plugin-kit'
+import { usePluginContext } from '@lesmoutonssauvages/kitsu-plugin-kit'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
