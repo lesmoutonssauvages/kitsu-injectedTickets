@@ -1,15 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ArrowLeft } from 'lucide-vue-next'
 import TaskSelector from '../components/TaskSelector.vue'
 import { useHostCatalogs } from '../composables/useHostCatalogs'
-import {
-  useTicketsApi,
-  type TicketPayload,
-  type TicketStatus,
-} from '../composables/useTicketsApi'
+import { useTicketsApi } from '../composables/useTicketsApi'
 import { useTicketsScope } from '../composables/useTicketsScope'
 
 const { t } = useI18n()
@@ -27,15 +23,15 @@ const ticketId = computed(() => {
 
 const isLoading = ref(false)
 const isSaving = ref(false)
-const errorMessage = ref<string | null>(null)
+const errorMessage = ref(null)
 
 const form = ref({
   title: '',
   text: '',
-  status: 'open' as TicketStatus,
-  project_id: null as string | null,
-  task_id: null as string | null,
-  assignee_id: null as string | null,
+  status: 'open',
+  project_id: null,
+  task_id: null,
+  assignee_id: null,
 })
 
 const productionOptions = computed(() =>
@@ -81,7 +77,7 @@ const loadTicket = async () => {
     form.value = {
       title: ticket.title || '',
       text: ticket.text || '',
-      status: (ticket.status as TicketStatus) || 'open',
+      status: ticket.status || 'open',
       project_id: ticket.project_id || null,
       task_id: ticket.task_id || null,
       assignee_id: ticket.assignee_id || null,
@@ -97,7 +93,7 @@ const loadTicket = async () => {
 const save = async () => {
   isSaving.value = true
   errorMessage.value = null
-  const payload: TicketPayload = {
+  const payload = {
     title: form.value.title,
     text: form.value.text,
     status: form.value.status,

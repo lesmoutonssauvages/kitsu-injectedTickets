@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Plus } from 'lucide-vue-next'
 import TicketList from '../components/TicketList.vue'
-import { useHostCatalogs, type HostTask } from '../composables/useHostCatalogs'
-import { useTicketsApi, type Ticket } from '../composables/useTicketsApi'
+import { useHostCatalogs } from '../composables/useHostCatalogs'
+import { useTicketsApi } from '../composables/useTicketsApi'
 import { useTicketsScope } from '../composables/useTicketsScope'
 
 const { t } = useI18n()
@@ -21,14 +21,12 @@ const {
 } = useHostCatalogs()
 const { productionId, episodeId } = useTicketsScope()
 
-const tickets = ref<Ticket[]>([])
+const tickets = ref([])
 const isLoading = ref(true)
 const loadError = ref(false)
-const deletingTicketId = ref<string | null>(null)
+const deletingTicketId = ref(null)
 /** task_id → { episode_name, sequence_name } from host loadTask. */
-const taskContextById = ref<
-  Record<string, { episode_name: string | null; sequence_name: string | null }>
->({})
+const taskContextById = ref({})
 
 const isStudioPage = computed(() => !productionId.value)
 
@@ -64,7 +62,7 @@ const displayTickets = computed(() =>
   }),
 )
 
-const contextFromTask = (task: HostTask | undefined) => {
+const contextFromTask = task => {
   if (!task) return { episode_name: null, sequence_name: null }
   const sequence_name =
     task.sequence?.name ||
@@ -75,7 +73,7 @@ const contextFromTask = (task: HostTask | undefined) => {
   return { episode_name, sequence_name }
 }
 
-const resolveTaskContexts = async (list: Ticket[]) => {
+const resolveTaskContexts = async list => {
   if (!Array.isArray(list) || list.length === 0) {
     taskContextById.value = {}
     return
@@ -83,10 +81,10 @@ const resolveTaskContexts = async (list: Ticket[]) => {
   await loadEpisodes()
   const next = { ...taskContextById.value }
   const taskIds = [
-    ...new Set(list.map((ticket) => ticket.task_id).filter(Boolean)),
-  ] as string[]
+    ...new Set(list.map(ticket => ticket.task_id).filter(Boolean)),
+  ]
   await Promise.all(
-    taskIds.map(async (taskId) => {
+    taskIds.map(async taskId => {
       if (next[taskId]) return
       try {
         const cached = getCachedTask(taskId)
@@ -111,10 +109,7 @@ const fetchData = async () => {
     await ensureHostCatalogs()
     const result = await api.fetchTickets(productionId.value, episodeId.value)
     if (!Array.isArray(result)) {
-      throw new Error(
-        (result as { message?: string } | null)?.message ||
-          'Unexpected tickets response',
-      )
+      throw new Error(result?.message || 'Unexpected tickets response')
     }
     tickets.value = result
     await resolveTaskContexts(tickets.value)
@@ -128,11 +123,11 @@ const fetchData = async () => {
   }
 }
 
-const handleDelete = async (ticket: Ticket) => {
+const handleDelete = async ticket => {
   deletingTicketId.value = ticket.id
   try {
     await api.deleteTicket(ticket.id)
-    tickets.value = tickets.value.filter((item) => item.id !== ticket.id)
+    tickets.value = tickets.value.filter(item => item.id !== ticket.id)
   } catch (error) {
     console.error('Error deleting ticket:', error)
   } finally {

@@ -1,5 +1,4 @@
-import { definePlugin } from '@lesmoutonssauvages/kitsu-plugin-kit'
-import type { RouteRecordRaw } from 'vue-router'
+import { definePlugin } from '../src-plugin-kit/front'
 
 import en from './locales/en'
 import fr from './locales/fr'
@@ -8,7 +7,7 @@ const listView = () => import('./views/TicketListView.vue')
 const detailView = () => import('./views/TicketDetailView.vue')
 
 // Same pages in the three scopes; the host namespaces the names internally.
-const pages: RouteRecordRaw[] = [
+const pages = [
   { path: '', name: 'list', component: listView },
   {
     path: 'new',

@@ -1,10 +1,10 @@
-import { usePluginContext } from '@lesmoutonssauvages/kitsu-plugin-kit'
+import { usePluginContext } from '../../src-plugin-kit/front'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { asEpisodeId } from './useTicketsApi'
 
-const asParam = (value: unknown): string | null =>
+const asParam = value =>
   typeof value === 'string' && value.length > 0 ? value : null
 
 /**
