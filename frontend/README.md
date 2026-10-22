@@ -8,9 +8,18 @@ Host / Zou contracts (source of truth):
 - [Kitsu `feat/flagged-inject-plugin`](https://github.com/lesmoutonssauvages/kitsu/tree/feat/flagged-inject-plugin) — `src/lib/plugins/*`
 - [Zou `feature/plugin-integration-flag`](https://github.com/lesmoutonssauvages/zou/tree/feature/plugin-integration-flag) — `injected` when `dist/plugin.js` exists
 
+## `src-plugin-kit/` (vendored, not an npm package)
+
 Authoring helpers live in `src-plugin-kit/front/` and Vite helpers in
-`src-plugin-kit/vite/` (no `kitsu-plugin-kit` dependency). The default export
-is `{ activate, deactivate }`.
+`src-plugin-kit/vite/`. They are **copied into this repo** on purpose so we
+do **not** pull a shared npm kit (`@…/kitsu-plugin-kit`). That keeps Kitsu /
+Zou PR recipes light for now: no private registry, no kit version to co-bump
+with the host, and the contract stays next to the sample plugin.
+
+**Longer term**, replace this folder with a dependency on a published kit
+package once it exists upstream.
+
+The default export of `src/plugin.js` is `{ activate, deactivate }`.
 
 In development the plugin has its **own Vite server**; the host loads the
 entry over HTTP when `KITSU_PLUGIN_DEV_URLS` is set.
@@ -25,14 +34,19 @@ npm run build    # → dist/plugin.js
 npm run watch    # rebuild on change
 ```
 
+`KITSU_PLUGIN_DEV_URLS` (on the Kitsu app) accepts two shapes:
+
 ```bash
-KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/index.js' \
-  npm run dev   # in the Kitsu app
+# 1) Port only → http://127.0.0.1:<port>/src/plugin.js
+KITSU_PLUGIN_DEV_URLS='injectedTickets=5175' npm run dev
+
+# 2) Full URL (keeps scheme/host/path; origin-only gets /src/plugin.js)
+KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/plugin.js' \
+  npm run dev
 ```
 
 Keep a built (or stub) `dist/plugin.js` so the user context stays
-`"injected": true` while using DEV_URLS. Pass the full `/src/index.js` path
-(the host origin-only default is still `/src/index.ts`).
+`"injected": true` while using DEV_URLS.
 
 ## Vite
 
@@ -42,7 +56,8 @@ import { defineConfig } from 'vite'
 
 export default defineConfig(
   defineKitsuPluginConfig({
-    server: { port: 5175, hmr: { clientPort: 5175 }, watch: { usePolling: true } },
+    // entry defaults to src/plugin.js
+    server: { port: 5175 },
   }),
 )
 ```
@@ -52,7 +67,7 @@ export default defineConfig(
 
 ## Layout
 
-- `src/index.js` — `definePlugin({ messages, routes })` with the same pages
+- `src/plugin.js` — `definePlugin({ messages, routes })` with the same pages
   under `studio`, `production`, and `episode`
 - `src-plugin-kit/front/` — `definePlugin`, `usePluginContext` (meta key `kitsuPlugin`)
 - `src-plugin-kit/vite/` — `defineKitsuPluginConfig` and build helpers
