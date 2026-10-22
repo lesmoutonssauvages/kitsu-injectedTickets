@@ -15,7 +15,7 @@ Repo: [lesmoutonssauvages/kitsu-injectedTickets](https://github.com/lesmoutonssa
 | UI | **Iframe** SPA (`frontend/dist/index.html`) | **Injected** (`frontend/dist/plugin.js`) |
 | How Zou detects mode | No `plugin.js` → iframe | `frontend/dist/plugin.js` present → `injected: true` in user context |
 | Manifest | `frontend_*_enabled` only | Same — **no** `injected` flag in `manifest.toml` |
-| Frontend | iframe SPA | local `src-plugin-kit/` helpers |
+| Frontend | iframe SPA | local `src-plugin-kit/` helpers (no npm kit) |
 | Vue | own app in the iframe | host Vue / router / i18n / vuex via `__KITSU_SHARED__` |
 | Context | query params + hash router | `usePluginContext()` + `useRoute().params` |
 
@@ -27,6 +27,19 @@ Backend layout matches the official plugin. Only frontend packaging and Kitsu
 integration change for inject.
 
 Copy this tree, rename `injectedTickets`, adapt models and resources.
+
+### Why `frontend/src-plugin-kit/`?
+
+Authoring helpers (`definePlugin`, `defineKitsuPluginConfig`, shared-deps
+shims) live **in-tree** under `frontend/src-plugin-kit/` so this example does
+**not** depend on a shared npm package (`@…/kitsu-plugin-kit` or similar).
+That keeps Kitsu / Zou PR recipes light for now: no private registry, no
+pinned kit version to bump alongside host changes, and the contract stays
+readable next to the plugin source.
+
+**Longer term**, this should move to a published shared kit package; plugins
+would then depend on it instead of vendoring `src-plugin-kit/`. Until that
+exists, copy or symlink this folder into other sample plugins.
 
 ## Installation
 
@@ -57,12 +70,12 @@ injectedTickets/
   migrations/
   frontend/
     src/
-      index.js              # definePlugin({ messages, routes })
+      plugin.js             # definePlugin({ messages, routes })
       locales/              # en.js / fr.js
       views/
       components/
       composables/          # API, host Vuex catalogs, scope
-    src-plugin-kit/
+    src-plugin-kit/         # vendored authoring kit (not an npm dep)
       front/                # definePlugin, usePluginContext
       vite/                 # defineKitsuPluginConfig helpers
     vite.config.js
@@ -122,7 +135,8 @@ Default export: `{ activate, deactivate }` as expected by Kitsu
 
 | Piece | Role |
 |-------|------|
-| `src/index.js` | `definePlugin({ messages, routes })` |
+| `src/plugin.js` | `definePlugin({ messages, routes })` |
+| `src-plugin-kit/` | vendored kit (avoids a shared npm package in PRs) |
 | `src-plugin-kit/front/` | authoring helpers (`activate` / `usePluginContext`) |
 | `src-plugin-kit/vite/` | Vite build helpers |
 | Scope | `useTicketsScope()` → `usePluginContext()` + route params |
@@ -162,11 +176,17 @@ npm run build    # dist/plugin.js
 npm run dev      # Vite on :5175
 ```
 
-Point Kitsu at the Vite entry (`KITSU_PLUGIN_DEV_URLS` on the flagged-inject branch):
+Point Kitsu at the Vite entry (`KITSU_PLUGIN_DEV_URLS` on the flagged-inject
+branch). Two shapes are supported:
 
 ```bash
-KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/index.js' \
-  npm run dev   # in the Kitsu app
+# 1) Port only → http://127.0.0.1:<port>/src/plugin.js
+KITSU_PLUGIN_DEV_URLS='injectedTickets=5175' npm run dev
+
+# 2) Full URL (keeps scheme/host/path; origin-only gets /src/plugin.js)
+KITSU_PLUGIN_DEV_URLS='injectedTickets=http://127.0.0.1:5175/src/plugin.js' \
+  npm run dev
+# e.g. https://host:5175 or a custom entry path
 ```
 
 HMR still needs a `frontend/dist/plugin.js` on disk (built file or stub) so Zou
