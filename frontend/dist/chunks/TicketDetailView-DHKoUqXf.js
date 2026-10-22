@@ -1,5 +1,5 @@
-import { A as e, C as t, D as n, E as r, M as i, N as a, O as o, S as s, T as c, _ as l, a as u, b as d, c as ee, d as f, f as p, g as m, h, i as g, j as _, k as v, l as y, n as b, o as te, p as x, r as S, s as C, t as w, u as ne, v as T, w as E, x as D, y as O } from "./useTicketsScope-DJOhA3PJ.js";
-//#region ../../../node_modules/.pnpm/lucide-vue-next@0.525.0_vue@3.5.41_typescript@6.0.3_/node_modules/lucide-vue-next/dist/esm/icons/arrow-left.js
+import { A as e, C as t, D as n, E as r, M as i, N as a, O as o, S as s, T as c, _ as l, a as u, b as d, c as ee, d as f, f as p, g as m, h, i as g, j as _, k as v, l as y, n as b, o as te, p as x, r as S, s as C, t as w, u as ne, v as T, w as E, x as D, y as O } from "./useTicketsScope-n5nu5bJk.js";
+//#region ../../../node_modules/.pnpm/lucide-vue-next@1.0.0_vue@3.5.41_typescript@6.0.3_/node_modules/lucide-vue-next/dist/esm/icons/arrow-left.js
 var k = C("arrow-left", [["path", {
 	d: "m12 19-7-7 7-7",
 	key: "1l729n"
@@ -156,7 +156,7 @@ var k = C("arrow-left", [["path", {
 				}
 			}
 		}, Rt = async (e) => {
-			if (!(!e || !d.projectId)) try {
+			if (e && d.projectId) try {
 				let t = await v.loadTask(e), n = t.entity_id || t.entity?.id;
 				if (!n) return;
 				let r = t.entity_type?.name || t.entity_type_name || "", i = await v.loadEntityCatalogs(d.projectId);
@@ -206,7 +206,7 @@ var k = C("arrow-left", [["path", {
 			}
 			Y.value = !1, K.value = !1, f("update:taskId", G.value || null);
 		}, { immediate: !0 }), e(() => d.taskId, async (e, t) => {
-			if (!(!d.projectId || !C.value || K.value) && e !== t && e !== G.value && e) {
+			if (d.projectId && C.value && !K.value && e !== t && e !== G.value && e) {
 				Y.value = !0;
 				try {
 					await Rt(e);
@@ -510,4 +510,4 @@ var k = C("arrow-left", [["path", {
 //#endregion
 export { Xt as default };
 
-//# sourceMappingURL=TicketDetailView-CgkxioxZ.js.map
+//# sourceMappingURL=TicketDetailView-DHKoUqXf.js.map

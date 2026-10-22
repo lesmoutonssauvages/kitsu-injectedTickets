@@ -1,4 +1,4 @@
-import { definePlugin } from 'kitsu-plugin-kit'
+import { definePlugin } from '@lesmoutonssauvages/kitsu-plugin-kit'
 import type { RouteRecordRaw } from 'vue-router'
 
 import en from './locales/en'

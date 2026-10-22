@@ -1,7 +1,7 @@
 # Injected Tickets plugin frontend
 
 Vue 3 plugin built as a library with
-[`kitsu-plugin-kit`](https://github.com/lesmoutonssauvages/kitsu-plugin-kit).
+[`/kitsu-plugin-kit`](https://www.npmjs.com/package//kitsu-plugin-kit).
 It runs inside the Kitsu host and borrows its Vue, router, store and i18n
 instances. In development it has its **own Vite server**; the host loads the
 entry over HTTP when `KITSU_PLUGIN_DEV_URLS` is set.
@@ -30,7 +30,7 @@ Keep a built (or stub) `dist/plugin.js` so the user context stays
 ## Vite
 
 ```ts
-import { defineKitsuPluginConfig } from 'kitsu-plugin-kit/vite'
+import { defineKitsuPluginConfig } from '@lesmoutonssauvages/kitsu-plugin-kit/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig(
@@ -56,5 +56,5 @@ export default defineConfig(
 - Navigation — short names `list` / `new` / `detail`; current short name on
   `route.meta.pluginPage`.
 
-See the [kit README](https://github.com/lesmoutonssauvages/kitsu-plugin-kit)
+See the [kit README](https://www.npmjs.com/package//kitsu-plugin-kit)
 for slots, providers, store modules, and host constraints.
