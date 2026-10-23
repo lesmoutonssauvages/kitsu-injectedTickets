@@ -1,6 +1,6 @@
 /**
  * Declarative wrapper over the raw host contract (`{ activate, deactivate }`).
- * Host: Kitsu `feat/flagged-inject-plugin` (`src/lib/plugins/runtime.js`).
+ * Host: Kitsu `feat/plugins-injected` (`src/lib/plugins/runtime.js`).
  *
  * `id` defaults to `__KITSU_PLUGIN_ID__` injected by `defineKitsuPluginConfig`
  * from the Zou `manifest.toml`.

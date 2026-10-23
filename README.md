@@ -3,8 +3,8 @@
 Reference Zou/Kitsu plugin: ticket management (issues on tasks) with models,
 API, and an **injected** Vue frontend (plain JS). Host / Zou contracts:
 
-- [Kitsu `feat/flagged-inject-plugin`](https://github.com/lesmoutonssauvages/kitsu/tree/feat/flagged-inject-plugin)
-- [Zou `feature/plugin-integration-flag`](https://github.com/lesmoutonssauvages/zou/tree/feature/plugin-integration-flag)
+- [Kitsu `feat/plugins-injected`](https://github.com/lesmoutonssauvages/kitsu/tree/feat/plugins-injected)
+- [Zou `feature/plugin-injected`](https://github.com/lesmoutonssauvages/zou/tree/feature/plugin-injected)
 
 Repo: [lesmoutonssauvages/kitsu-injectedTickets](https://github.com/lesmoutonssauvages/kitsu-injectedTickets)
 

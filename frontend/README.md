@@ -5,8 +5,8 @@ its Vue, router, store and i18n via `globalThis.__KITSU_SHARED__`.
 
 Host / Zou contracts (source of truth):
 
-- [Kitsu `feat/flagged-inject-plugin`](https://github.com/lesmoutonssauvages/kitsu/tree/feat/flagged-inject-plugin) — `src/lib/plugins/*`
-- [Zou `feature/plugin-integration-flag`](https://github.com/lesmoutonssauvages/zou/tree/feature/plugin-integration-flag) — `injected` when `dist/plugin.js` exists
+- [Kitsu `feat/plugins-injected`](https://github.com/lesmoutonssauvages/kitsu/tree/feat/plugins-injected) — `src/lib/plugins/*`
+- [Zou `feature/plugin-injected`](https://github.com/lesmoutonssauvages/zou/tree/feature/plugin-injected) — `injected` when `dist/plugin.js` exists
 
 ## `src-plugin-kit/` (vendored, not an npm package)
 

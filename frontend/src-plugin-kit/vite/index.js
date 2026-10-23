@@ -22,7 +22,7 @@ export const kitsuPluginBase = pluginId => `/api/plugins/${pluginId}/frontend/`
  * Vite config for an injected Kitsu plugin: single ESM entry at
  * `dist/plugin.js`, stylesheet inlined, Vue stack borrowed from the host.
  *
- * Contract: Kitsu `feat/flagged-inject-plugin` + Zou `feature/plugin-integration-flag`.
+ * Contract: Kitsu `feat/plugins-injected` + Zou `feature/plugin-injected`.
  */
 export const defineKitsuPluginConfig = (options = {}) => {
   const {
